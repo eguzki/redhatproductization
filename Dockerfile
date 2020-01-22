@@ -32,11 +32,19 @@ RUN echo "Fetching RCM tools" \
  && yum install -y ${INSTALL_PKGS} \
  && rpm -V ${INSTALL_PKGS} \
  && yum clean all -y \
- && rm -rf /var/cache/yum
+ && rm -rf /var/cache/yum \
+ && echo "Configuring system files" \
+ && sed -i -E -e 's/^\# default_realm =.*/&\n default_realm = REDHAT.COM/' /etc/krb5.conf
 
 RUN echo "Installing Docker CE client" \
  && yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo \
  && yum install -y docker-ce-cli
 
+RUN echo "Installing several tools" \
+ && yum install -y vim
+
 WORKDIR /home/prod
+
+ADD clone_repos.sh /home/prod
+
 CMD ["/bin/bash"]

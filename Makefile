@@ -50,7 +50,7 @@ run: container
 .PHONY: add-ssh-key
 add-ssh-key: export KEY_PATH?=$(HOME)/.ssh/id_rsa
 add-ssh-key: export KEYPUB_PATH?=$(KEY_PATH).pub
-add-ssh-key: container
+add-ssh-key:
 	@echo "*** Using KEY_PATH=$(KEY_PATH) and KEYPUB_PATH=$(KEYPUB_PATH)..."
 	docker cp $(KEY_PATH) $(CONTAINER_NAME):/root/.ssh/id_rsa
 	docker cp $(KEYPUB_PATH) $(CONTAINER_NAME):/root/.ssh/id_rsa.pub
