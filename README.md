@@ -8,6 +8,7 @@ This project builds a *personal* RHEL productization image for Docker.
 
 # Inside of the container
 > ./clone_repos.sh eastizle
+
 > kinit eastizle
 
 # Use this target to have your SSH key copied over to the container

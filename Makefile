@@ -4,7 +4,7 @@ PROJECT_PATH := $(patsubst %/,%,$(dir $(MKFILE_PATH)))
 DOCKER_HOST_SOCKET ?= /var/run/docker.sock
 DOCKER_CONTAINER_SOCKET ?= $(DOCKER_HOST_SOCKET)
 
-IMAGE_NAME ?= productization-3scale-eguzki
+IMAGE_NAME ?= productization-3scale
 CONTAINER_NAME ?= $(shell echo $(IMAGE_NAME) | sed -E -e 's/\//-/g')-container
 
 nameservers = $(shell awk 'BEGIN{ORS=" "} $$1=="nameserver" {print $$2}' $(1))
