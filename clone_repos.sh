@@ -4,25 +4,15 @@ set -exo pipefail
 REPOS_HOST="pkgs.devel.redhat.com"
 REPOS="
 containers/3scale-operator
+containers/3scale-operator-dev-operator-metadata
+containers/3scale-operator-stage-operator-metadata
+containers/3scale-operator-prod-operator-metadata
 containers/3scale-toolbox
 containers/3scale-apicast-operator
 containers/3scale-apicast-operator-dev-operator-metadata
 containers/3scale-apicast-operator-stage-operator-metadata
 containers/3scale-apicast-operator-prod-operator-metadata
 "
-
-extract_ssh_user_from_kerberos_user()
-{
-    local user="${1}"
-    # Why we need this:
-    # Traditionally, a principal is divided into three parts: the primary,
-    # the instance, and the realm.
-    # The format of a typical Kerberos V5 principal is primary/instance@REALM.
-    # https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html
-    # Below, we are just keeping the primary, which in our case, matches the
-    # ssh username.
-    sed -e 's/\/.*$//' <<< "${user}"
-}
 
 ssh_cfg_insert_entry_for()
 {
@@ -82,7 +72,7 @@ main()
     fi
 
     local ssh_cfg_file_path="${SSH_CONFIG_FILE:-${HOME}/.ssh/config}"
-    local ssh_user="${SSH_USER:-$(extract_ssh_user_from_kerberos_user "${user}")}"
+    local ssh_user="${SSH_USER:-${user}}"
 
     test "x${ssh_user}" = "x" && {
         echo >&2 "Please specify your SSH username by setting SSH_USER=<user>"

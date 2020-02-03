@@ -7,9 +7,9 @@ This project builds a *personal* RHEL productization image for Docker.
 > make run
 
 # Inside of the container
-> ./clone_repos.sh eastizle
-
 > kinit eastizle
+
+> ./clone_repos.sh eastizle
 
 # Use this target to have your SSH key copied over to the container
 > make KEY_PATH=$HOME/.ssh/gerrit KEYPUB_PATH=$HOME/.ssh/gerrit.pub add-ssh-key
