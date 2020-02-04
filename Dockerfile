@@ -41,7 +41,13 @@ RUN echo "Installing Docker CE client" \
  && yum install -y docker-ce-cli
 
 RUN echo "Installing several tools" \
- && yum install -y vim
+ && INSTALL_PKGS="vim \
+    python3-pip.noarch" \
+ && yum install -y ${INSTALL_PKGS} \
+ && rpm -V ${INSTALL_PKGS} \
+ && yum clean all -y \
+ && rm -rf /var/cache/yum \
+ && pip3 install operator-courier 
 
 WORKDIR /home/prod
 
