@@ -48,7 +48,12 @@ RUN echo "Installing several tools" \
  && rpm -V ${INSTALL_PKGS} \
  && yum clean all -y \
  && rm -rf /var/cache/yum \
- && pip3 install operator-courier 
+ && pip3 install operator-courier
+
+RUN echo "Configure git" \
+ && git config --global user.email "eastizle@redhat.com" \
+ && git config --global user.name "Eguzki Astiz Lezaun" \
+ && git config --global --add alias.gr "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
 WORKDIR /home/prod
 
