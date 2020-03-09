@@ -42,7 +42,8 @@ RUN echo "Installing Docker CE client" \
 
 RUN echo "Installing several tools" \
  && INSTALL_PKGS="bind-utils \
-    python3-pip.noarch" \
+    python3-pip.noarch \
+    vim-enhanced" \
  && yum install -y ${INSTALL_PKGS} \
  && rpm -V ${INSTALL_PKGS} \
  && yum clean all -y \
